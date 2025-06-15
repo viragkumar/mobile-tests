@@ -1,0 +1,34 @@
+{
+  "explorer.confirmDragAndDrop": false,
+  "workbench.iconTheme": "vscode-icons",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "GitHub Light",
+  "explorer.confirmDelete": false,
+  "workbench.startupEditor": "none",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "git.ignoreRebaseWarning": true,
+  "window.zoomLevel": 0,
+  "editor.accessibilitySupport": "off",
+  "gitlens.currentLine.dateFormat": "",
+  "cucumber.features": ["src/features/**/*.feature"],
+  "cucumber.glue": ["src/step-definitions/**/*.ts"]
+}
