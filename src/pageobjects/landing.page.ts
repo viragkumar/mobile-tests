@@ -4,13 +4,13 @@ export class LandingPage extends WDIOHelper {
   private get btn_accept_cookies() {
     return driver.isAndroid
       ? "//android.widget.Button[@resource-id='com.sseairtricity.dev:id/btn_accept_cookies']"
-      : "#NA";
+      : "//XCUIElementTypeButton[@name='bannerAllowAllButton']";
   }
 
   private get landingPageLoginButton() {
     return driver.isAndroid
       ? "//android.widget.Button[@resource-id='landingPageLoginButton']"
-      : "#NA";
+      : "//XCUIElementTypeButton[@name='Login']";
   }
 
   public async acceptCookies() {
