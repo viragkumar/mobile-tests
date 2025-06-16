@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Mobile tests using WebdriverIO",
   "scripts": {
-    "chrome-local": "wdio run src/config/wdio.local.chrome.conf.ts",
-    "android-local": "wdio run src/config/wdio.local.android.conf.ts",
-    "android-bs": "wdio run src/config/wdio.browserstack.android.conf.ts",
-    "ios-bs": "wdio run src/config/wdio.browserstack.ios.conf.ts"
+    "chrome-local": "cross-env PLATFORM=chrome EXECUTION_MODE=local wdio run src/config/wdio.local.chrome.conf.ts",
+    "android-local": "cross-env PLATFORM=android EXECUTION_MODE=local wdio run src/config/wdio.local.android.conf.ts",
+    "android-bs": "cross-env PLATFORM=android EXECUTION_MODE=BS wdio run src/config/wdio.browserstack.android.conf.ts",
+    "ios-bs": "cross-env PLATFORM=ios EXECUTION_MODE=BS wdio run src/config/wdio.browserstack.ios.conf.ts",
+    "format": "prettier --write \"{src, features}/**/*.*\""
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -24,10 +25,13 @@
     "wdio-json-html-reporter": "^1.5.13"
   },
   "dependencies": {
+    "allure-commandline": "^2.34.0",
     "appium": "^2.19.0",
     "chromedriver": "^137.0.3",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
     "eslint": "^9.29.0",
+    "prettier-plugin-gherkin": "^3.1.2",
     "wdio-chromedriver-service": "^8.1.1"
   }
 }

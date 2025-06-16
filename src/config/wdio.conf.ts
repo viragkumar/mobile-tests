@@ -1,4 +1,6 @@
+import { execSync } from "child_process";
 import * as dotenv from "dotenv";
+import Constants from "../helpers/constants.helper";
 dotenv.config();
 console.log("Running tests with BrowserStack: " + process.env.BS_USER);
 
@@ -145,9 +147,31 @@ export const config: WebdriverIO.Config = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-    ["allure", { stdout: true, outputDir: "_results_/allure-results" }],
+    [
+      "allure",
+      {
+        stdout: true,
+        outputDir: Constants.ALLURE_RESULT_DIR,
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+        useCucumberStepReporter: true,
+        addConsoleLogs: true,
+        reportTitle: "Test Results",
+        reportName: "Test Report",
+        reportedEnvironmentVars: {
+          PLATFORM: process.env.PLATFORM,
+          EXECUTION_MODE: process.env.EXECUTION_MODE,
+          BS_USER: process.env.BS_USER,
+          APP:
+            process.env.EXECUTION_MODE === "BS"
+              ? process.env.PLATFORM === "ANDROID"
+                ? process.env.BS_APP_ANDROID
+                : process.env.BS_APP_IOS
+              : process.env.APP_PATH,
+        },
+      },
+    ],
   ],
-
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
@@ -192,6 +216,7 @@ export const config: WebdriverIO.Config = {
   onPrepare: function (config, capabilities) {
     // console.log("config: %o", config);
     console.log("capabilities: %o", capabilities);
+    console.log("Running tests with BrowserStack: " + process.env.PLATFORM);
   },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
@@ -333,8 +358,23 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: function (exitCode, config, capabilities, results) {
+    console.log("All tests completed with exit code:", exitCode);
+    console.log("Generating results...", results);
+    // Generate Allure report after all tests are completed
+    try {
+      console.log("Generating Allure report...");
+      execSync(
+        `npx allure generate ${Constants.ALLURE_RESULT_DIR} --clean --single-file -o ${Constants.ALLURE_REPORT_DIR}`,
+        {
+          stdio: "inherit",
+        },
+      );
+      console.log("Allure report successfully generated!");
+    } catch (err) {
+      console.error("Error generating Allure report:", err);
+    }
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

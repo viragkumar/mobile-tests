@@ -8,7 +8,7 @@ export const androidConfig = {
       "appium:deviceName": process.env.BS_DEVICE_NAME_ANDROID || "OnePlus.*",
       "appium:platformVersion":
         process.env.BS_DEVICE_OS_VERSION_ANDROID || "11", // Example: "11", "12", or "13"
-      "appium:app": process.env.BS_APP_ID_ANDROID, // Replace with your app ID
+      "appium:app": process.env.BS_APP_ANDROID, // Replace with your app ID
       "appium:autoGrantPermissions": true,
       "appium:bsoptions": {
         projectName: "My Android Project",

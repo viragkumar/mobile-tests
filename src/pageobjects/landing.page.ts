@@ -14,11 +14,11 @@ export class LandingPage extends WDIOHelper {
   }
 
   public async acceptCookies() {
-    await this.click(this.btn_accept_cookies);
+    await this.click(this.btn_accept_cookies, "Accept Cookies Button");
   }
 
   public async clickLogin() {
-    await this.click(this.landingPageLoginButton);
+    await this.click(this.landingPageLoginButton, "Login Button");
   }
 }
 
