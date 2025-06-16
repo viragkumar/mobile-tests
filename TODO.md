@@ -4,3 +4,4 @@
 4. Generate allure env file
 5. Formatter
 6. Lint
+7. assertions

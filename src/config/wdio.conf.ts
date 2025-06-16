@@ -301,8 +301,9 @@ export const config: WebdriverIO.Config = {
    * @param {number}             result.duration  duration of scenario in milliseconds
    * @param {object}             context          Cucumber World object
    */
-  // afterStep: function (step, scenario, result, context) {
-  // },
+  afterStep: async function (step, scenario, result, context) {
+    await browser.takeScreenshot();
+  },
   /**
    *
    * Runs after a Cucumber Scenario.
@@ -368,7 +369,7 @@ export const config: WebdriverIO.Config = {
         `npx allure generate ${Constants.ALLURE_RESULT_DIR} --clean --single-file -o ${Constants.ALLURE_REPORT_DIR}`,
         {
           stdio: "inherit",
-        },
+        }
       );
       console.log("Allure report successfully generated!");
     } catch (err) {
